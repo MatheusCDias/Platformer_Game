@@ -85,7 +85,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -99,7 +99,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -534,7 +534,24 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      goblin_spritesheet_0: 685267539325443055
+      goblin_spritesheet_1: 1389895093345447926
+      goblin_spritesheet_10: -7691990320725225722
+      goblin_spritesheet_11: -6932334397416635257
+      goblin_spritesheet_12: -7797427971559797800
+      goblin_spritesheet_13: -7626393077474405584
+      goblin_spritesheet_14: -3391707435513064751
+      goblin_spritesheet_15: 8748727094010827178
+      goblin_spritesheet_16: -3391699629897029785
+      goblin_spritesheet_2: 6241837322878474811
+      goblin_spritesheet_3: 1552869151895934863
+      goblin_spritesheet_4: -4993338339827292023
+      goblin_spritesheet_5: -6654304060574600212
+      goblin_spritesheet_6: 6126467551051091254
+      goblin_spritesheet_7: -576407222678904361
+      goblin_spritesheet_8: 1954245441328434962
+      goblin_spritesheet_9: -2517039487888108646
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

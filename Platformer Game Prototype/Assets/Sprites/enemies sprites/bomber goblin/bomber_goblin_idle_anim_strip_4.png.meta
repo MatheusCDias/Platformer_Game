@@ -46,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -209,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bomber_goblin_idle_anim_strip_4_0: 4062965729305634177
+      bomber_goblin_idle_anim_strip_4_1: 5706325708820212063
+      bomber_goblin_idle_anim_strip_4_2: 5654424801616684977
+      bomber_goblin_idle_anim_strip_4_3: 1412791399166139725
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
