@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
             else if (doubleJump)
             {
                 rig2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                animator.SetInteger("Transition", 3);
                 doubleJump = false;
             }
         }
