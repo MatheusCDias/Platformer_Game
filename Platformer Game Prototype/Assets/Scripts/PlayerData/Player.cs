@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -44,26 +44,23 @@ public class Player : MonoBehaviour
 
         rig2D.linearVelocity = new Vector2(movement * speed, rig2D.linearVelocityY);
 
-        if (!isJumping && !isAttacking)
+        if (movement < 0)
         {
-            if (movement < 0)
-            {
-                if (!isJumping)
-                    animator.SetInteger("Transition", 1);
-                sprite.flipX = true;
-            }
-            else if (movement > 0)
-            {
-                if (!isJumping)
-                    animator.SetInteger("Transition", 1);
-                sprite.flipX = false;
-            }
-            else if (movement == 0)
-            {
-                animator.SetInteger("Transition", 0);
-            }
+            if (!isJumping && !isAttacking)
+                animator.SetInteger("Transition", 1);
+            sprite.flipX = true;
         }
-        
+        else if (movement > 0)
+        {
+            if (!isJumping && !isAttacking)
+                animator.SetInteger("Transition", 1);
+            sprite.flipX = false;
+        }
+        else if (movement == 0)
+        {
+            if (!isJumping && !isAttacking)
+                animator.SetInteger("Transition", 0);
+        }
     }
 
     void Jump()
@@ -93,12 +90,6 @@ public class Player : MonoBehaviour
             isAttacking = true;
             Collider2D hit = Physics2D.OverlapBox(point.transform.position, new Vector2 (b, h), 0);
             animator.SetInteger("Transition", 4);
-
-            if (hit != null)
-            {
-                Debug.Log(hit.name);
-            }
-
             StartCoroutine("OnAttack");
         }        
     }
