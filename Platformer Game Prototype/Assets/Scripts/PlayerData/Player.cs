@@ -88,10 +88,10 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             isAttacking = true;
-            Collider2D hit = Physics2D.OverlapBox(point.transform.position, new Vector2 (b, h), 0);
+            Collider2D hit = Physics2D.OverlapBox(point.transform.position, new Vector2(b, h), 0);
             animator.SetInteger("Transition", 4);
             StartCoroutine("OnAttack");
-        }        
+        }
     }
 
     IEnumerator OnAttack()
