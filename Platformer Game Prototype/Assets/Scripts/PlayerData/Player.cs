@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator animator;
 
-    [SerializeField]
+    [SerializeField, Range(0,5)]
     private int life;
     [SerializeField]
     private float speed;
@@ -103,7 +103,11 @@ public class Player : MonoBehaviour
 
             if (hit != null)
             {
-                hit.GetComponent<Enemy>().OnHit();
+                if (hit.GetComponent<Enemy>() != null)
+                    hit.GetComponent<Enemy>().OnHit();
+
+                if (hit.GetComponent<miscellaneousHit>() != null)
+                    hit.GetComponent<miscellaneousHit>().OnHit();
             }
 
             StartCoroutine("OnAttack");
