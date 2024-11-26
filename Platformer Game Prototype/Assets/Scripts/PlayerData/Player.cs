@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
         rig2D = GetComponent<Rigidbody2D>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
-        point = GameObject.Find("Point");
+        point = GameObject.Find("Player Point");
     }
 
     // Update is called once per frame
@@ -99,6 +99,11 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(0.183f);
         isAttacking = false;
+
+        if (isJumping)
+        {
+            animator.SetInteger("Transition", 3);
+        }
     }
 
     private void OnDrawGizmos()

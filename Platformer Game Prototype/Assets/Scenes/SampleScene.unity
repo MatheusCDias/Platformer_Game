@@ -4959,7 +4959,7 @@ GameObject:
   m_Component:
   - component: {fileID: 338782463}
   m_Layer: 3
-  m_Name: Point
+  m_Name: Player Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6150,7 +6150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 755971241}
   m_Layer: 0
-  m_Name: Point
+  m_Name: Slime Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6165,7 +6165,7 @@ Transform:
   m_GameObject: {fileID: 755971240}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.363, y: -0.07, z: 0}
+  m_LocalPosition: {x: -0.398, y: -0.229, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8040,17 +8040,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.06072271}
+  m_Offset: {x: 0.021365166, y: -0.187639}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.5, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5, y: 0.37855458}
+  m_Size: {x: 1.1478062, y: 0.63238716}
   m_EdgeRadius: 0
 --- !u!50 &1734895684
 Rigidbody2D:
@@ -8143,7 +8143,7 @@ Transform:
   m_GameObject: {fileID: 1734895682}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1169763, y: -3.749, z: 0}
+  m_LocalPosition: {x: 12.53, y: -3.498, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8164,7 +8164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Slime
   life: 3
-  speed: -3
+  speed: 1
   damage: 1
   groundLayer:
     serializedVersion: 2

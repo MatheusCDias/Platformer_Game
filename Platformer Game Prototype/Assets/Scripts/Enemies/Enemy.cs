@@ -7,11 +7,11 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private string enemyName;
-    [SerializeField]
+    [SerializeField, Range(0, 5)]
     private int life;
-    [SerializeField]
+    [SerializeField, Range(0, 5)]
     private float speed;
-    [SerializeField]
+    [SerializeField, Range(0, 5)]
     private int damage;
 
     public Rigidbody2D Rig2D

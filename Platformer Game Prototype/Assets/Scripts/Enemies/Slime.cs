@@ -4,12 +4,19 @@ using UnityEngine;
 public class Slime : Enemy
 {
     public LayerMask groundLayer;
-    public GameObject point;
+    [SerializeField]
+    private GameObject point;
+    private float currentSpeed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        currentSpeed = this.Speed;
+
+        if (transform.eulerAngles.y == 0)
+        {
+            currentSpeed = -currentSpeed;
+        }
     }
 
     // Update is called once per frame
@@ -20,7 +27,7 @@ public class Slime : Enemy
 
     private void FixedUpdate()
     {
-        Rig2D.linearVelocity = new Vector2(Speed, Rig2D.linearVelocityY);
+        Rig2D.linearVelocity = new Vector2(currentSpeed, Rig2D.linearVelocityY);
         Collision();
     }
 
@@ -28,10 +35,11 @@ public class Slime : Enemy
     {
         Collider2D hit = Physics2D.OverlapCircle(point.transform.position, .05f, groundLayer);
 
+        
+
         if (hit != null)
         {
-            Debug.Log("Collide");
-            this.Speed = -this.Speed;
+            this.currentSpeed = -this.currentSpeed;
 
             if (transform.eulerAngles.y == 0)
                 transform.eulerAngles = new Vector3(0, 180, 0);
