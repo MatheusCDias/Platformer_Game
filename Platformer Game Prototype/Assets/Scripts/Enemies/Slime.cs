@@ -22,7 +22,8 @@ public class Slime : Enemy
     // Update is called once per frame
     void Update()
     {
-        
+        if (Speed == 0)
+            currentSpeed = 0;
     }
 
     private void FixedUpdate()
@@ -34,8 +35,6 @@ public class Slime : Enemy
     void Collision()
     {
         Collider2D hit = Physics2D.OverlapCircle(point.transform.position, .05f, groundLayer);
-
-        
 
         if (hit != null)
         {

@@ -4,6 +4,7 @@ public class Enemy : MonoBehaviour
 {
     private Rigidbody2D rig2D;
     private BoxCollider2D bxCollider2D;
+    private Animator anim;
 
     [SerializeField]
     private string enemyName;
@@ -20,6 +21,18 @@ public class Enemy : MonoBehaviour
         set { rig2D = value; }
     }
 
+    public BoxCollider2D BxCollider2D
+    {
+        get { return bxCollider2D; }
+        set { bxCollider2D = value; }
+    }
+
+    public Animator Anim
+    {
+        get { return anim; }
+        set { anim = value; }
+    }
+
     public string EnemyName
     {
         get { return enemyName; }
@@ -29,15 +42,7 @@ public class Enemy : MonoBehaviour
     public int Life
     {
         get { return life; }
-        set
-        {
-            life = value;
-            if (life <= 0)
-            {
-                life = 0;
-                // Enemy dies
-            }
-        }
+        set { life = value; }
     }
 
     public float Speed
@@ -57,6 +62,7 @@ public class Enemy : MonoBehaviour
     {
         rig2D = GetComponent<Rigidbody2D>();
         bxCollider2D = GetComponent<BoxCollider2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -69,5 +75,24 @@ public class Enemy : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void OnHit()
+    {
+        anim.SetTrigger("Hit");
+        life--;
+
+        if (life <= 0)
+        {
+            life = 0;
+            speed = 0;
+            Death();
+        }
+    }
+
+    void Death()
+    {
+        anim.SetTrigger("Death");
+        Destroy(gameObject, 0.417f);
     }
 }

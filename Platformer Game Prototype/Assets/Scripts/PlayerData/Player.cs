@@ -7,16 +7,24 @@ public class Player : MonoBehaviour
     private Rigidbody2D rig2D;
     private SpriteRenderer sprite;
     private Animator animator;
-    public GameObject point;
 
-    public float speed;
-    public float jumpForce;
+    [SerializeField]
+    private int life;
+    [SerializeField]
+    private float speed;
+    [SerializeField]
+    private float jumpForce;
     private float b = 1;
     private float h = .57f;
 
     private bool isJumping;
     private bool doubleJump;
     private bool isAttacking;
+
+    [SerializeField]
+    private LayerMask hitLayer;
+
+    public GameObject point;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -89,10 +97,21 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             isAttacking = true;
-            Collider2D hit = Physics2D.OverlapBox(point.transform.position, new Vector2(b, h), 0);
+            Collider2D hit = Physics2D.OverlapBox(point.transform.position, new Vector2(b, h), 0, hitLayer);
+
             animator.SetInteger("Transition", 4);
+
+            if (hit != null)
+            {
+                hit.GetComponent<Enemy>().OnHit();
+            }
+
             StartCoroutine("OnAttack");
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(point.transform.position, new Vector3(b, h, 0));
     }
 
     IEnumerator OnAttack()
@@ -106,9 +125,24 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    void OnHit()
     {
-        Gizmos.DrawWireCube(point.transform.position, new Vector3(b, h, 0));
+        animator.SetTrigger("Hit");
+        life--;
+
+        if (life <= 0)
+        {
+            life = 0;
+            speed = 0;
+            Death();
+        }
+    }
+
+    void Death()
+    {
+        animator.SetTrigger("Death");
+        Destroy(gameObject, 0.55f);
+        // Game Over
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -116,6 +150,14 @@ public class Player : MonoBehaviour
         if (collision.gameObject.layer == 6)
         {
             isJumping = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            OnHit();
         }
     }
 }
