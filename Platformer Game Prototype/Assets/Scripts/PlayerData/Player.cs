@@ -57,13 +57,13 @@ public class Player : MonoBehaviour
         {
             if (!isJumping && !isAttacking)
                 animator.SetInteger("Transition", 1);
-            sprite.flipX = true;
+            transform.eulerAngles = new Vector3(0, 180, 0);
         }
         else if (movement > 0)
         {
             if (!isJumping && !isAttacking)
                 animator.SetInteger("Transition", 1);
-            sprite.flipX = false;
+            transform.eulerAngles = new Vector3(0, 0, 0);
         }
         else if (movement == 0)
         {

@@ -29,12 +29,18 @@ public class strangeDoor : MonoBehaviour
 
     void OpeningDoor()
     {
-        if (this.openSystemObject.GetComponent<miscellaneousHit>().hitted && Input.GetButtonDown("Fire1"))
+        switch (openSystem)
         {
-            anim.SetTrigger("Open");
-            boxCollider2D.enabled = false;
-            this.openSystemObject.GetComponent<miscellaneousHit>().hitted = false;
+            case OpenSystem.Lever:
+                if (this.openSystemObject.GetComponent<miscellaneousHit>().hitted && Input.GetButtonDown("Fire1"))
+                {
+                    anim.SetTrigger("Open");
+                    boxCollider2D.enabled = false;
+                    this.openSystemObject.GetComponent<miscellaneousHit>().hitted = false;
+                }
+                break;
         }
+        
     }
 
     public enum OpenSystem

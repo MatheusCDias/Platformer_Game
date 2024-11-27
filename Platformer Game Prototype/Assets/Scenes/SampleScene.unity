@@ -28973,7 +28973,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitTwice: 0
-  hitted: 0
 --- !u!95 &1950863373
 Animator:
   serializedVersion: 7
