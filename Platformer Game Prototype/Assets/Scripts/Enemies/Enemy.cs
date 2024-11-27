@@ -15,6 +15,9 @@ public class Enemy : MonoBehaviour
     [SerializeField, Range(0, 5)]
     private int damage;
 
+    [SerializeField, Space]
+    private AnimationClip deathClip;
+
     public Rigidbody2D Rig2D
     {
         get { return rig2D; }
@@ -48,7 +51,7 @@ public class Enemy : MonoBehaviour
     public float Speed
     {
         get { return speed; }
-        set { speed = Mathf.Max(value, 0); }    // Ensures that Speed ​​will never be negative
+        set { speed = Mathf.Max(value, 0); }
     }
 
     public int Damage
@@ -93,6 +96,6 @@ public class Enemy : MonoBehaviour
     void Death()
     {
         anim.SetTrigger("Death");
-        Destroy(gameObject, 0.417f);
+        Destroy(gameObject, deathClip.length);
     }
 }

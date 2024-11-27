@@ -5,6 +5,7 @@ public class miscellaneousHit : MonoBehaviour
     private Animator anim;
     [SerializeField]
     private bool hitTwice;
+    protected internal bool hitted;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class miscellaneousHit : MonoBehaviour
 
         if (!hitTwice)
         {
+            hitted = true;
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
     }

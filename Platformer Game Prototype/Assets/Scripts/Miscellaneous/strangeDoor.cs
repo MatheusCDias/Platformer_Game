@@ -24,13 +24,17 @@ public class strangeDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        OpeningDoor();
     }
 
     void OpeningDoor()
     {
-        anim.SetTrigger("Open");
-        boxCollider2D.enabled = false;
+        if (this.openSystemObject.GetComponent<miscellaneousHit>().hitted && Input.GetButtonDown("Fire1"))
+        {
+            anim.SetTrigger("Open");
+            boxCollider2D.enabled = false;
+            this.openSystemObject.GetComponent<miscellaneousHit>().hitted = false;
+        }
     }
 
     public enum OpenSystem

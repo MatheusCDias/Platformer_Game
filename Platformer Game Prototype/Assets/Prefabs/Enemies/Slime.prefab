@@ -234,6 +234,7 @@ MonoBehaviour:
   life: 3
   speed: 1
   damage: 1
+  deathClip: {fileID: 7400000, guid: 14783ac44d06ea1469065fb9d92407d9, type: 2}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64

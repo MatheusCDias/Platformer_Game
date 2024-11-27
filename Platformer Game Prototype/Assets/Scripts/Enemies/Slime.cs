@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Slime : Enemy
 {
+    [Space]
     public LayerMask groundLayer;
     [SerializeField]
     private GameObject point;
