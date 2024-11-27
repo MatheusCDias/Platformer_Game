@@ -4677,8 +4677,9 @@ GameObject:
   m_Component:
   - component: {fileID: 183486984}
   - component: {fileID: 183486983}
+  - component: {fileID: 183486985}
   m_Layer: 0
-  m_Name: rabit_idle_anim_0
+  m_Name: Rabit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4728,7 +4729,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 3634238526545027749, guid: 9b93605fc58697041b0b27e8ae9bb392, type: 3}
+  m_Sprite: {fileID: 1494933274880506986, guid: 26590b1f023b3b9458cfa2c7b7382b43, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4748,12 +4749,34 @@ Transform:
   m_GameObject: {fileID: 183486982}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.668367, y: -3.674388, z: 0.011795083}
+  m_LocalPosition: {x: 27.668367, y: -3.92, z: 0.011795083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1750014570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &183486985
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183486982}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 326466634133a1d4591865aa5840123f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &307299955
 GameObject:
   m_ObjectHideFlags: 0
@@ -6496,8 +6519,10 @@ GameObject:
   - component: {fileID: 944639287}
   - component: {fileID: 944639288}
   - component: {fileID: 944639289}
+  - component: {fileID: 944639290}
+  - component: {fileID: 944639291}
   m_Layer: 0
-  m_Name: strange_door_closed_anim_0
+  m_Name: Strange Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6512,7 +6537,7 @@ Transform:
   m_GameObject: {fileID: 944639286}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 64.983, y: -1.4249997, z: 0.011795083}
+  m_LocalPosition: {x: 64.983, y: -2.932, z: 0.011795083}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6607,18 +6632,54 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0933609, y: 0}
+  m_Offset: {x: 0.0933609, y: 1.5068573}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 1, y: 3}
     newSize: {x: 1, y: 3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8132782, y: 3}
+  m_Size: {x: 0.8132782, y: 3.0140173}
   m_EdgeRadius: 0
+--- !u!95 &944639290
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944639286}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2dc310ef1e10bd84bbb7abe7e46bb757, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &944639291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944639286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb6848792f3831141816a86560060f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openSystem: 0
+  openSystemObject: {fileID: 1950863368}
 --- !u!1 &973801684
 GameObject:
   m_ObjectHideFlags: 0
@@ -28774,8 +28835,10 @@ GameObject:
   - component: {fileID: 1950863370}
   - component: {fileID: 1950863369}
   - component: {fileID: 1950863371}
-  m_Layer: 0
-  m_Name: lever_turned_left_0
+  - component: {fileID: 1950863373}
+  - component: {fileID: 1950863372}
+  m_Layer: 7
+  m_Name: Lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28897,6 +28960,42 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.75}
   m_EdgeRadius: 0
+--- !u!114 &1950863372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950863368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa71459950c6a5d44a30af40fc98f689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitTwice: 0
+  hitted: 0
+--- !u!95 &1950863373
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950863368}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c1beda8a1c42ade4590fa932294c7f1e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2007478315
 GameObject:
   m_ObjectHideFlags: 0
