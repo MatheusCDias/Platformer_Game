@@ -12,11 +12,17 @@ public class GameController : MonoBehaviour
     private int health;
     [SerializeField]
     private int coins;
+    [SerializeField]
+    private List<Sprite> fonts = new List<Sprite>();
 
-    public GameObject menu;
+    [SerializeField]
+    private GameObject menu;
+    [SerializeField]
+    private GameObject uIPlayerData;
     private bool menuCondition = false;
 
-    public List<Sprite> fonts = new List<Sprite>();
+    [SerializeField]
+    private Image currentHealth;
 
     public int Lifes
     {
@@ -40,6 +46,38 @@ public class GameController : MonoBehaviour
     void Update()
     {
         MenuMode();
+        healthUIController();
+    }
+
+    public void healthUIController()
+    {
+        switch (health)
+        {
+            case 0:
+                currentHealth.sprite = fonts[0];
+                menu.GetComponentInChildren<Image>().fillAmount = 0;
+                break;
+            case 1:
+                currentHealth.sprite = fonts[1];
+                menu.GetComponentInChildren<Image>().fillAmount = .2f;
+                break;
+            case 2:
+                currentHealth.sprite = fonts[2];
+                menu.GetComponentInChildren<Image>().fillAmount = .4f;
+                break;
+            case 3:
+                currentHealth.sprite = fonts[3];
+                menu.GetComponentInChildren<Image>().fillAmount = .6f;
+                break;
+            case 4:
+                currentHealth.sprite = fonts[4];
+                menu.GetComponentInChildren<Image>().fillAmount = .8f;
+                break;
+            case 5:
+                currentHealth.sprite = fonts[5];
+                menu.GetComponentInChildren<Image>().fillAmount = 1;
+                break;
+        }
     }
 
     public void GetCoin()
@@ -53,6 +91,7 @@ public class GameController : MonoBehaviour
         if (Input.GetButtonDown("Fire3"))
         {
             menu.SetActive(!menuCondition);
+            uIPlayerData.SetActive(menuCondition);
             menuCondition = !menuCondition;
         }
     }
