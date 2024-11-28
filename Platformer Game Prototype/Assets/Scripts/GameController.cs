@@ -12,6 +12,9 @@ public class GameController : MonoBehaviour
     [SerializeField, Range(0, 99)] private int coins;
     [SerializeField, Range(0, 99)] private int orbs;
 
+    [Header("Items")]
+    [SerializeField, Range(0, 5)] private int potions;
+
     [Header("UI GameObjects")]
     [SerializeField] private GameObject menu;
 
@@ -20,6 +23,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Image currentHealth;
     [SerializeField] private Image[] currentCoins = new Image[2];
     [SerializeField] private Image[] currentOrbs = new Image[2];
+    [SerializeField] private Image itemFont;
 
     [Header("Fonts")]
     [SerializeField] private List<Sprite> numberFonts = new List<Sprite>();
@@ -66,6 +70,17 @@ public class GameController : MonoBehaviour
 
         // Update Orbs
         UpdateDigitUI(currentOrbs, orbs);
+
+        // Update Potions
+        UpdateItem(potions, 5);
+    }
+
+    private void UpdateItem(int itemAmount, int maxItems)
+    {
+        if (itemAmount >= 0 && itemAmount <= maxItems)
+        {
+            itemFont.sprite = numberFonts[itemAmount];
+        }
     }
 
     private void UpdateDigitUI(Image[] digitImages, int value)

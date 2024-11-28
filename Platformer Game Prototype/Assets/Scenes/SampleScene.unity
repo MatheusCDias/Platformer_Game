@@ -9084,7 +9084,7 @@ GameObject:
   - component: {fileID: 1745220074}
   - component: {fileID: 1745220073}
   m_Layer: 5
-  m_Name: Font 1
+  m_Name: Current Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9129,7 +9129,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1766211923, guid: f61b6bb24d09c744c90dc8bbf854f76d, type: 3}
+  m_Sprite: {fileID: 6323133540406899595, guid: f61b6bb24d09c744c90dc8bbf854f76d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9329,6 +9329,7 @@ MonoBehaviour:
   health: 5
   coins: 0
   orbs: 0
+  potions: 1
   menu: {fileID: 202649414}
   currentLife:
   - {fileID: 1621285333}
@@ -9340,6 +9341,7 @@ MonoBehaviour:
   currentOrbs:
   - {fileID: 1173638535}
   - {fileID: 1961504954}
+  itemFont: {fileID: 1745220073}
   numberFonts:
   - {fileID: 6323133540406899595, guid: f61b6bb24d09c744c90dc8bbf854f76d, type: 3}
   - {fileID: 1766211923, guid: f61b6bb24d09c744c90dc8bbf854f76d, type: 3}
