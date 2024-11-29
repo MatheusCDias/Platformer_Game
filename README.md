@@ -1,9 +1,7 @@
 <p align="center">
   <img src="https://img.shields.io/static/v1?label=Unity&message=engine&color=black&style=flat&logo=unity"/>
   <img src="https://img.shields.io/static/v1?label=CSharp&message=language&color=blue&style=flat&logo=csharp"/>
-  <img src="http://img.shields.io/static/v1?label=License&message=MIT&color=green&style=flat"/>
-  <img src="http://img.shields.io/static/v1?label=Testes&message=100%&color=green&style=flat"/>
-  <img src="http://img.shields.io/static/v1?label=Status&message=concluido&color=green&style=flat"/>
+  <img src="http://img.shields.io/static/v1?label=Status&message=In Progress&color=yellow&style=flat"/>
 </p>
 
 <h1> Platformer/Metroidvania Game </h1>
