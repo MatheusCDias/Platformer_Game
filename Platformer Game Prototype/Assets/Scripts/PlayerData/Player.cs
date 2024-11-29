@@ -1,157 +1,166 @@
-
-﻿using System.Collections;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // Components
     private Rigidbody2D rig2D;
     private SpriteRenderer sprite;
     private Animator animator;
 
-    [SerializeField, Range(0,5)]
-    private int life;
-    [SerializeField]
-    private float speed;
-    [SerializeField]
-    private float jumpForce;
-    private float b = 1;
-    private float h = .57f;
+    // Configurable Parameters
+    [Header("Player Stats")]
+    [SerializeField, Range(0, 5)] private int life = 3;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float jumpForce = 10f;
 
-    private bool isJumping;
-    private bool doubleJump;
-    private bool isAttacking;
+    [Header("Attack Settings")]
+    [SerializeField] private Vector2 attackBoxSize = new Vector2(1f, 0.5f);
+    [SerializeField] private LayerMask hitLayer;
 
-    [SerializeField]
-    private LayerMask hitLayer;
+    [Header("References")]
+    [SerializeField] private Transform attackPoint;
 
-    public GameObject point;
+    // Internal State
+    private bool isJumping = false;
+    private bool canDoubleJump = false;
+    private bool isAttacking = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // Constants
+    private static readonly int Transition = Animator.StringToHash("Transition");
+    private static readonly int HitTrigger = Animator.StringToHash("Hit");
+    private static readonly int DeathTrigger = Animator.StringToHash("Death");
+
+    private void Awake()
     {
+        // Cache Components
         rig2D = GetComponent<Rigidbody2D>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();
-        point = GameObject.Find("Player Point");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        Jump();
-        Attack();
+        HandleInput();
     }
 
     private void FixedUpdate()
     {
-        Movement();
+        Move();
     }
 
-    void Movement()
-    {
-        float movement = Input.GetAxis("Horizontal");
-
-        rig2D.linearVelocity = new Vector2(movement * speed, rig2D.linearVelocityY);
-
-        if (movement < 0)
-        {
-            if (!isJumping && !isAttacking)
-                animator.SetInteger("Transition", 1);
-            transform.eulerAngles = new Vector3(0, 180, 0);
-        }
-        else if (movement > 0)
-        {
-            if (!isJumping && !isAttacking)
-                animator.SetInteger("Transition", 1);
-            transform.eulerAngles = new Vector3(0, 0, 0);
-        }
-        else if (movement == 0)
-        {
-            if (!isJumping && !isAttacking)
-                animator.SetInteger("Transition", 0);
-        }
-    }
-
-    void Jump()
+    private void HandleInput()
     {
         if (Input.GetButtonDown("Jump"))
         {
-            if (!isJumping)
-            {
-                rig2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                animator.SetInteger("Transition", 2);
-                isJumping = true;
-                doubleJump = true;
-            }
-            else if (doubleJump)
-            {
-                rig2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                animator.SetInteger("Transition", 3);
-                doubleJump = false;
-            }
+            HandleJump();
         }
-    }
 
-    void Attack()
-    {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !isAttacking)
         {
-            isAttacking = true;
-            Collider2D hit = Physics2D.OverlapBox(point.transform.position, new Vector2(b, h), 0, hitLayer);
-
-            animator.SetInteger("Transition", 4);
-
-            if (hit != null)
-            {
-                if (hit.GetComponent<Enemy>() != null)
-                    hit.GetComponent<Enemy>().OnHit();
-
-                if (hit.GetComponent<miscellaneousHit>() != null)
-                    hit.GetComponent<miscellaneousHit>().OnHit();
-            }
-
-            StartCoroutine("OnAttack");
+            HandleAttack();
         }
     }
-    private void OnDrawGizmos()
+
+    private void Move()
     {
-        Gizmos.DrawWireCube(point.transform.position, new Vector3(b, h, 0));
+        float movement = Input.GetAxis("Horizontal");
+        rig2D.linearVelocity = new Vector2(movement * speed, rig2D.linearVelocity.y);
+
+        // Animation and Flip
+        if (movement != 0)
+        {
+            if (!isJumping && !isAttacking)
+            {
+                SetAnimationState(1); // Running
+            }
+            sprite.flipX = movement < 0;
+        }
+        else if (!isJumping && !isAttacking)
+        {
+            SetAnimationState(0); // Idle
+        }
     }
 
-    IEnumerator OnAttack()
+    private void HandleJump()
     {
-        yield return new WaitForSeconds(0.183f);
+        if (!isJumping)
+        {
+            PerformJump();
+            isJumping = true;
+            canDoubleJump = true;
+        }
+        else if (canDoubleJump)
+        {
+            PerformJump();
+            canDoubleJump = false;
+            SetAnimationState(3); // Double Jump Animation
+        }
+    }
+
+    private void PerformJump()
+    {
+        rig2D.linearVelocity = new Vector2(rig2D.linearVelocity.x, 0); // Reset Y velocity
+        rig2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        SetAnimationState(2); // Jump Animation
+    }
+
+    private void HandleAttack()
+    {
+        isAttacking = true;
+        SetAnimationState(4); // Attack Animation
+
+        Collider2D hit = Physics2D.OverlapBox(attackPoint.position, attackBoxSize, 0, hitLayer);
+        if (hit != null)
+        {
+            var enemy = hit.GetComponent<Enemy>();
+            enemy?.OnHit();
+
+            var miscellaneous = hit.GetComponent<miscellaneousHit>();
+            miscellaneous?.OnHit();
+        }
+
+        StartCoroutine(ResetAttack());
+    }
+
+    private IEnumerator ResetAttack()
+    {
+        yield return new WaitForSeconds(0.183f); // Attack animation duration
         isAttacking = false;
 
         if (isJumping)
         {
-            animator.SetInteger("Transition", 3);
+            SetAnimationState(3); // Return to Jump Animation
         }
     }
 
-    void OnHit()
+    private void SetAnimationState(int state)
     {
-        animator.SetTrigger("Hit");
+        animator.SetInteger(Transition, state);
+    }
+
+    public void OnHit()
+    {
+        animator.SetTrigger(HitTrigger);
         life--;
 
         if (life <= 0)
         {
-            life = 0;
-            speed = 0;
-            Death();
+            HandleDeath();
         }
     }
 
-    void Death()
+    private void HandleDeath()
     {
-        animator.SetTrigger("Death");
-        Destroy(gameObject, 0.55f);
-        // Game Over
+        animator.SetTrigger(DeathTrigger);
+        speed = 0;
+        Destroy(gameObject, 1f); // Wait for animation to finish
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 6)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isJumping = false;
         }
@@ -159,16 +168,21 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.CompareTag("Enemy"))
         {
             OnHit();
         }
-
-        if (collision.gameObject.tag == "Coin")
+        else if (collision.CompareTag("Coin"))
         {
             GameController.instance.GetCoin();
-            collision.GetComponent<Animator>().SetTrigger("Pick");
-            Destroy(collision.gameObject, .417f);
+            collision.GetComponent<Animator>()?.SetTrigger("Pick");
+            Destroy(collision.gameObject, 0.417f);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(attackPoint.position, attackBoxSize);
     }
 }
