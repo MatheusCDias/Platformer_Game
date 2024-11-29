@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
     // Configurable Parameters
     [Header("Player Stats")]
-    [SerializeField, Range(0, 5)] private int life = 3;
+    [SerializeField, Range(0, 5)] private int health = 5;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 10f;
 
@@ -143,9 +143,10 @@ public class Player : MonoBehaviour
     public void OnHit()
     {
         animator.SetTrigger(HitTrigger);
-        life--;
+        health--;
+        GameController.instance.HandleHealth(health);
 
-        if (life <= 0)
+        if (health <= 0)
         {
             HandleDeath();
         }
@@ -155,7 +156,8 @@ public class Player : MonoBehaviour
     {
         animator.SetTrigger(DeathTrigger);
         speed = 0;
-        Destroy(gameObject, 1f); // Wait for animation to finish
+        Destroy(gameObject, 0.55f); // Wait for animation to finish
+        GameController.instance.HandleLifes();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

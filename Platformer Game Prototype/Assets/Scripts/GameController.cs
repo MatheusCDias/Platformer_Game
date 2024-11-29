@@ -99,6 +99,29 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void HandleLifes()
+    {
+        lifes--;
+        
+        if (lifes <= 0)
+        {
+            lifes = 0;
+            // Game Over
+        }
+        else
+        {
+            // Revive
+        }
+
+        UpdateUI();
+    }
+
+    public void HandleHealth(int health)
+    {
+        this.health = health;
+        UpdateUI();
+    }
+
     public void GetCoin()
     {
         coins = Mathf.Clamp(coins + 1, 0, 99); // Limit max value to 99

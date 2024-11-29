@@ -3,8 +3,7 @@ using UnityEngine;
 public class miscellaneousHit : MonoBehaviour
 {
     private Animator anim;
-    [SerializeField]
-    private bool hitTwice;
+    [SerializeField] private bool hitTwice;
     protected internal bool hitted;
 
     private void Awake()

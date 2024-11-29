@@ -1,101 +1,55 @@
 ﻿using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
-    private Rigidbody2D rig2D;
-    private BoxCollider2D bxCollider2D;
-    private Animator anim;
+    // Components
+    protected Rigidbody2D rig2D;
+    protected BoxCollider2D bxCollider2D;
+    protected Animator anim;
 
-    [SerializeField]
-    private string enemyName;
-    [SerializeField, Range(0, 5)]
-    private int life;
-    [SerializeField, Range(0, 5)]
-    private float speed;
-    [SerializeField, Range(0, 5)]
-    private int damage;
+    // Enemy Parameters
+    [Header("Enemy Stats")]
+    [SerializeField] private string enemyName;
+    [SerializeField, Range(0, 5)] private int life = 3;
+    [SerializeField, Range(0, 5)] private float speed = 1f;
+    [SerializeField, Range(0, 5)] private int damage = 1;
 
-    [SerializeField, Space]
-    private AnimationClip deathClip;
+    [Header("Death")]
+    [SerializeField] private AnimationClip deathClip;
 
-    public Rigidbody2D Rig2D
+    // State
+    protected bool isAlive = true;
+
+    protected virtual void Awake()
     {
-        get { return rig2D; }
-        set { rig2D = value; }
-    }
-
-    public BoxCollider2D BxCollider2D
-    {
-        get { return bxCollider2D; }
-        set { bxCollider2D = value; }
-    }
-
-    public Animator Anim
-    {
-        get { return anim; }
-        set { anim = value; }
-    }
-
-    public string EnemyName
-    {
-        get { return enemyName; }
-        set { enemyName = value; }
-    }
-
-    public int Life
-    {
-        get { return life; }
-        set { life = value; }
-    }
-
-    public float Speed
-    {
-        get { return speed; }
-        set { speed = Mathf.Max(value, 0); }
-    }
-
-    public int Damage
-    {
-        get { return damage; }
-        set { damage = Mathf.Max(value, 0); }
-    }
-
-
-    private void Awake()
-    {
+        // Cache components
         rig2D = GetComponent<Rigidbody2D>();
         bxCollider2D = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void OnHit(int damageTaken = 1)
     {
+        if (!isAlive) return;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void OnHit()
-    {
+        life -= damageTaken;
         anim.SetTrigger("Hit");
-        life--;
 
         if (life <= 0)
         {
+            isAlive = false;
             life = 0;
             speed = 0;
             Death();
         }
     }
 
-    void Death()
+    protected virtual void Death()
     {
         anim.SetTrigger("Death");
-        Destroy(gameObject, deathClip.length);
+        Destroy(gameObject, deathClip != null ? deathClip.length : .5f); // Use default length if no clip
     }
+
+    // Public API for movement
+    public float GetSpeed() => isAlive ? speed : 0;
 }

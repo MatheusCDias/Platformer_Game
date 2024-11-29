@@ -1,55 +1,72 @@
-using System.Drawing;
 using UnityEngine;
 
 public class Slime : Enemy
 {
-    [Space]
-    public LayerMask groundLayer;
-    [SerializeField]
-    private GameObject point;
+    [Header("Slime Settings")]
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform collisionPoint;
+    [SerializeField] private float collisionRadius = 0.1f;
+
     private float currentSpeed;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Awake()
     {
-        currentSpeed = this.Speed;
+        base.Awake();
+        currentSpeed = GetSpeed();
 
+        // Invert direction if facing left
         if (transform.eulerAngles.y == 0)
         {
             currentSpeed = -currentSpeed;
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Speed == 0)
-            currentSpeed = 0;
-    }
-
     private void FixedUpdate()
     {
-        Rig2D.linearVelocity = new Vector2(currentSpeed, Rig2D.linearVelocityY);
-        Collision();
+        if (!isAlive) return;
+
+        // Movement logic
+        rig2D.linearVelocity = new Vector2(currentSpeed, rig2D.linearVelocityY);
+
+        // Handle collisions
+        CheckCollision();
     }
 
-    void Collision()
+    private void CheckCollision()
     {
-        Collider2D hit = Physics2D.OverlapCircle(point.transform.position, .05f, groundLayer);
+        if (collisionPoint == null)
+        {
+            Debug.LogWarning($"{name} is missing a collision point!");
+            return;
+        }
+
+        Collider2D hit = Physics2D.OverlapCircle(collisionPoint.position, collisionRadius, groundLayer);
 
         if (hit != null)
         {
-            this.currentSpeed = -this.currentSpeed;
-
-            if (transform.eulerAngles.y == 0)
-                transform.eulerAngles = new Vector3(0, 180, 0);
-            else
-                transform.eulerAngles = Vector3.zero;
+            FlipDirection();
         }
+    }
+
+    private void FlipDirection()
+    {
+        currentSpeed = -currentSpeed;
+
+        // Rotate sprite based on direction
+        transform.eulerAngles = (transform.eulerAngles.y == 0) ? new Vector3(0, 180, 0) : Vector3.zero;
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(point.transform.position, .05f);
+        if (collisionPoint != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(collisionPoint.position, collisionRadius);
+        }
+    }
+
+    protected override void Death()
+    {
+        base.Death();
     }
 }
