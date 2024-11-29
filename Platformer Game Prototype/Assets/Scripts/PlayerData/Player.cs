@@ -75,7 +75,8 @@ public class Player : MonoBehaviour
             {
                 SetAnimationState(1); // Running
             }
-            sprite.flipX = movement < 0;
+
+            transform.eulerAngles = (movement < 0) ? new Vector3(0, 180, 0) : new Vector3(0, 0, 0);
         }
         else if (!isJumping && !isAttacking)
         {
@@ -174,7 +175,7 @@ public class Player : MonoBehaviour
         {
             OnHit();
         }
-        else if (collision.CompareTag("Coin"))
+        else if (collision.CompareTag("Collectable"))
         {
             GameController.instance.GetCoin();
             collision.GetComponent<Animator>()?.SetTrigger("Pick");

@@ -238,4 +238,5 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  point: {fileID: 5814356124108025358}
+  collisionPoint: {fileID: 7291294333909402730}
+  collisionRadius: 0.1
