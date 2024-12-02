@@ -128,6 +128,12 @@ public class GameController : MonoBehaviour
         UpdateUI();
     }
 
+    public void GetOrb()
+    {
+        orbs = Mathf.Clamp(orbs + 1, 0, 99); // Limit max value to 99
+        UpdateUI();
+    }
+
     public void HandleMenuInput()
     {
         // Toggle menu when pressing "Fire3" button
