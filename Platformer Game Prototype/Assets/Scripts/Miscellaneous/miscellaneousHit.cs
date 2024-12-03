@@ -7,7 +7,6 @@ public class miscellaneousHit : MonoBehaviour
     protected internal bool hitted;
 
     [SerializeField] private MiscellaneousType type;
-    public float value;
 
     private void Awake()
     {
@@ -40,10 +39,6 @@ public class miscellaneousHit : MonoBehaviour
         {
             case MiscellaneousType.Vase:
                 HandleVase();
-                break;
-
-            default:
-                Debug.Log("None");
                 break;
         }
     }
