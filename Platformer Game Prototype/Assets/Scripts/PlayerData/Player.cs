@@ -178,9 +178,13 @@ public class Player : MonoBehaviour
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Collectable"))
         {
             if (collision.CompareTag("Coin"))
+            {
                 GameController.instance.GetCoin();
+            }
             else if (collision.CompareTag("Orb"))
+            {
                 GameController.instance.GetOrb();
+            }
 
             collision.GetComponent<Animator>()?.SetTrigger("Pick");
             Destroy(collision.gameObject, 0.417f);
