@@ -19,8 +19,9 @@ public class GameController : MonoBehaviour
     [SerializeField, Range(0, 5)] private int apple;
 
     [Header("UI GameObjects")]
-    [SerializeField] private Image healthFillImage;
-    [SerializeField] private Image menuFillPanel;
+    private Image healthFillImage;
+    private Image menuFillPanel;
+    private bool openPanel = false;
 
     [Header("UI Data")]
     [SerializeField] private Image[] currentLife = new Image[2];
@@ -36,9 +37,9 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        menuFillPanel = GameObject.Find("Black Panel").GetComponent<Image>();
-        menuFillPanel.GetComponent<Image>().enabled = false;
         healthFillImage = GameObject.Find("Health Bar").GetComponent<Image>();
+        menuFillPanel = GameObject.Find("Black Panel").GetComponent<Image>();
+        menuFillPanel.enabled = openPanel;
     }
 
     private void Update()
@@ -165,7 +166,8 @@ public class GameController : MonoBehaviour
         // Toggle menu when pressing "Fire3" button
         if (Input.GetButtonDown("Fire3"))
         {
-            menuFillPanel.enabled = !(bool)menuFillPanel;
+            openPanel = !openPanel;
+            menuFillPanel.enabled = openPanel;
         }
     }
 }
