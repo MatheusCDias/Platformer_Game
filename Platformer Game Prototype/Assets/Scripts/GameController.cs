@@ -19,7 +19,8 @@ public class GameController : MonoBehaviour
     [SerializeField, Range(0, 5)] private int apple;
 
     [Header("UI GameObjects")]
-    [SerializeField] private GameObject menu;
+    [SerializeField] private Image healthFillImage;
+    [SerializeField] private Image menuFillPanel;
 
     [Header("UI Data")]
     [SerializeField] private Image[] currentLife = new Image[2];
@@ -31,12 +32,13 @@ public class GameController : MonoBehaviour
     [Header("Fonts")]
     [SerializeField] private List<Sprite> numberFonts = new List<Sprite>();
 
-    private Image menuFillImage; // Cache for Menu Image
 
     private void Awake()
     {
         instance = this;
-        menuFillImage = menu.GetComponentInChildren<Image>();
+        menuFillPanel = GameObject.Find("Black Panel").GetComponent<Image>();
+        menuFillPanel.GetComponent<Image>().enabled = false;
+        healthFillImage = GameObject.Find("Health Bar").GetComponent<Image>();
     }
 
     private void Update()
@@ -61,7 +63,7 @@ public class GameController : MonoBehaviour
         if (health >= 0 && health <= 5)
         {
             currentHealth.sprite = numberFonts[health];
-            menuFillImage.fillAmount = health / 5f; // Calculates the value directly as a ratio
+            healthFillImage.fillAmount = health / 5f; // Calculates the value directly as a ratio
         }
         else
         {
@@ -163,7 +165,7 @@ public class GameController : MonoBehaviour
         // Toggle menu when pressing "Fire3" button
         if (Input.GetButtonDown("Fire3"))
         {
-
+            menuFillPanel.enabled = !(bool)menuFillPanel;
         }
     }
 }
