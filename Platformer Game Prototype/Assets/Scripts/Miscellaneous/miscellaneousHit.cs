@@ -57,6 +57,9 @@ public class miscellaneousHit : MonoBehaviour
         {
             InstantiateCoin();
         }
+        GameObject spawnItemPos = GameObject.Find("Spawn Item Point");
+
+        InstantiateItem("Health Potion", spawnItemPos.transform);
 
     }
 
@@ -68,6 +71,14 @@ public class miscellaneousHit : MonoBehaviour
         {
             coinRb.AddForce(new Vector2(Random.Range(-1f, 1f), 5), ForceMode2D.Impulse);    // Coin Physics
         }
+    }
+
+    private void InstantiateItem(string itemName, Transform spawnPosition)
+    {
+        GameObject Item = Instantiate(Resources.Load<GameObject>(itemName), spawnPosition.position, Quaternion.identity);
+        GameController.instance.GetItem();
+
+        Destroy(Item, 1.5f);
     }
 
     private void ItemDropRate()

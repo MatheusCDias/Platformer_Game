@@ -34,7 +34,6 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        // Cache Components
         rig2D = GetComponent<Rigidbody2D>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponentInChildren<Animator>();

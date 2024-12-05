@@ -137,6 +137,12 @@ public class GameController : MonoBehaviour
         UpdateUI();
     }
 
+    public void GetItem()
+    {
+        potions = Mathf.Clamp(potions + 1, 0, 5); // Limit max value to 5
+        UpdateUI();
+    }
+
     public void HandleMenuInput()
     {
         // Toggle menu when pressing "Fire3" button
