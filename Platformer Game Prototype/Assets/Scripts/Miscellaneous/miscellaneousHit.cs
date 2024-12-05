@@ -65,16 +65,16 @@ public class miscellaneousHit : MonoBehaviour
         switch (randomItem)
         {
             case 0:
-                InstantiateItem("Health Potion", spawnItemPos.transform);
+                InstantiateItem("Health Potion", spawnItemPos.transform, 0);
                 break;
             case 1:
-                InstantiateItem("Antidote Potion", spawnItemPos.transform);
+                InstantiateItem("Antidote Potion", spawnItemPos.transform, 1);
                 break;
             case 2:
-                InstantiateItem("Meat", spawnItemPos.transform);
+                InstantiateItem("Meat", spawnItemPos.transform, 2);
                 break;
             case 3:
-                InstantiateItem("Apple", spawnItemPos.transform);
+                InstantiateItem("Apple", spawnItemPos.transform, 3);
                 break;
         }
         
@@ -91,10 +91,10 @@ public class miscellaneousHit : MonoBehaviour
         }
     }
 
-    private void InstantiateItem(string itemName, Transform spawnPosition)
+    private void InstantiateItem(string itemName, Transform spawnPosition, int itemNumber)
     {
         GameObject Item = Instantiate(Resources.Load<GameObject>(itemName), spawnPosition.position, Quaternion.identity);
-        GameController.instance.GetItem();
+        GameController.instance.GetItem(itemNumber);
 
         Destroy(Item, 1.5f);
     }

@@ -137,9 +137,24 @@ public class GameController : MonoBehaviour
         UpdateUI();
     }
 
-    public void GetItem()
+    public void GetItem(int itemNumber)
     {
-        potions = Mathf.Clamp(potions + 1, 0, 5); // Limit max value to 5
+        switch (itemNumber)
+        {
+            case 0: // Health Potion
+                potions = Mathf.Clamp(potions + 1, 0, 5); // Limit max value to 5
+                break;
+            case 1: // Antidote Potion
+                antidote = Mathf.Clamp(antidote + 1, 0, 5); // Limit max value to 5
+                break;
+            case 2: // Meat
+                meat = Mathf.Clamp(meat + 1, 0, 5); // Limit max value to 5
+                break;
+            case 3: // Apple
+                apple = Mathf.Clamp(apple + 1, 0, 5); // Limit max value to 5
+                break;
+        }
+
         UpdateUI();
     }
 
