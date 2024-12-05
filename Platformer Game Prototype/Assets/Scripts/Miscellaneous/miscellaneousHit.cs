@@ -48,25 +48,31 @@ public class miscellaneousHit : MonoBehaviour
 
     private void HandleVase()
     {
-        CoinPhysics();
+        InstantiateCoin();
     }
 
     public void HandleLootBox()
     {
         for (int i = 0; i < 3;  i++)
         {
-            CoinPhysics();
+            InstantiateCoin();
         }
+
     }
 
-    private void CoinPhysics()
+    private void InstantiateCoin()
     {
         GameObject coin = Instantiate(Resources.Load<GameObject>("Coin"), transform.position, Quaternion.identity);
         Rigidbody2D coinRb = coin.GetComponent<Rigidbody2D>();
         if (coinRb != null)
         {
-            coinRb.AddForce(new Vector2(Random.Range(-1f, 1f), 5), ForceMode2D.Impulse);
+            coinRb.AddForce(new Vector2(Random.Range(-1f, 1f), 5), ForceMode2D.Impulse);    // Coin Physics
         }
+    }
+
+    private void ItemDropRate()
+    {
+
     }
 
     public enum MiscellaneousType

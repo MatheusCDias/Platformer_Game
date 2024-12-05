@@ -14,6 +14,9 @@ public class GameController : MonoBehaviour
 
     [Header("Items")]
     [SerializeField, Range(0, 5)] private int potions;
+    [SerializeField, Range(0, 5)] private int antidote;
+    [SerializeField, Range(0, 5)] private int meat;
+    [SerializeField, Range(0, 5)] private int apple;
 
     [Header("UI GameObjects")]
     [SerializeField] private GameObject menu;
