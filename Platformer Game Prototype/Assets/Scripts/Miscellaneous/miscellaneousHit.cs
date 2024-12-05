@@ -59,7 +59,25 @@ public class miscellaneousHit : MonoBehaviour
         }
         GameObject spawnItemPos = GameObject.Find("Spawn Item Point");
 
-        InstantiateItem("Health Potion", spawnItemPos.transform);
+
+        int randomItem = Random.Range(0, 3);
+
+        switch (randomItem)
+        {
+            case 0:
+                InstantiateItem("Health Potion", spawnItemPos.transform);
+                break;
+            case 1:
+                InstantiateItem("Antidote Potion", spawnItemPos.transform);
+                break;
+            case 2:
+                InstantiateItem("Meat", spawnItemPos.transform);
+                break;
+            case 3:
+                InstantiateItem("Apple", spawnItemPos.transform);
+                break;
+        }
+        
 
     }
 
